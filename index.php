@@ -10,6 +10,20 @@ BONUS:
 Alcuni prodotti (es. antipulci) avranno la caratteristica che saranno disponibili solo in un periodo particolare (es. da maggio ad agosto).
 buon lavoro!
 */
+
+require_once __DIR__ . "/classes/products/Product.php";
+require_once __DIR__ . "/classes/products/Food.php";
+
+$dentastix = new Food ("Dentastix", "19,99€", "1234567890", "dogs", "Lorem", "2022-10-10");
+
+// $_name,
+// $_price,
+// $_barcode,
+// $_food_for
+// $_food_label
+// $_expiration_date
+
+var_dump($dentastix);
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +37,7 @@ buon lavoro!
 <body>
 
     <h1>HW</h1>
+    <h2>Buono questo <?php echo $dentastix->getName() ?></h2>
     
 </body>
 </html>
