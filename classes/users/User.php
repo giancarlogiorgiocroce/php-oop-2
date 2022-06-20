@@ -3,16 +3,20 @@ class User{
     private $name;
     private $surname;
     private $email;
+    private $card_date;
     private $age;
     private $gender;
 
     public function __construct(
                                 $_name,
                                 $_surname,
-                                $_email){
+                                $_email,
+                                $_card_date){
         $this->name = $_name;
         $this->surname = $_surname;
         $this->email = $_email;
+        $this->card_date = $_card_date;
+
     }
 
     public function setName($_name){
@@ -30,6 +34,9 @@ class User{
     public function setGender($_gender){
         $this->gender = $_gender;
     }
+    public function setCardDate($_card_date){
+        $this->card_date = $_card_date;
+    }
 
     public function getName(){
         return $this->name;
@@ -45,6 +52,9 @@ class User{
     }
     public function getGender(){
         return $this->gender;
+    }
+    public function getCardDate(){
+        return $this->card_date;
     }
 }
 

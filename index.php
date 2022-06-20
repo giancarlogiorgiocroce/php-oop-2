@@ -18,13 +18,8 @@ require_once __DIR__ . "/classes/products/Toy.php";
 require_once __DIR__ . "/classes/users/User.php";
 require_once __DIR__ . "/classes/users/Regular.php";
 
-//Alcune istanze
-$dentastix = new Food ("Dentastix", 19.99, "1234567890", "dogs", "Lorem", "2022-10-10");
-$laser = new Toy ("Laser", 10.00, "111111111", "cats");
-
-$ciccio = new Regular ("Ciccio", "Pasticcio", "CP@gmail.it", 50, "2021-01-01");
-$gino = new User ("Gino", "Pippo", "gp@gmail.it");
-$gino->setGender("NB");
+require_once __DIR__ . "/istanze/lista_prodotti.php";
+require_once __DIR__ . "/istanze/lista_utenti.php";
 
 
 function calculateDiscount($price, $discount){
@@ -32,7 +27,8 @@ function calculateDiscount($price, $discount){
     return $resoult;
 }
 
-// var_dump(calculateDiscount());
+// var_dump($array_utenti);
+// var_dump($array_prodotti);
 ?>
 
 <!DOCTYPE html>
@@ -41,45 +37,52 @@ function calculateDiscount($price, $discount){
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
     <title>Esercizio - OOP 2</title>
 </head>
 <body>
 
-    <h1>HW</h1>
-    <h2>Buono questo <?php echo $dentastix->getName() ?></h2>
-    <h2>I gatti inseguono i <?php echo $laser->getName() ?> perché sono sciocchi</h2>
-    
-    <h3>Mai fidarsi dei brutti ceffi su internet che sanno che la tua carta scade il: <?php echo $ciccio->getCardDate() ?></h3>
+    <div class="container">
+        <!-- Riga dei clienti -->
+        <div class="row">
+            <?php foreach ($array_utenti as $utente => $proprietà): ?>
+            <col-2>
+                <p>
+                    <?php echo $proprietà->getName() ?>
+                </p>
 
-    <br>
+                <ul>
+                    <li> Cognome: <?php echo $proprietà->getSurname() ?> </li>
+                    <li> Email: <?php echo $proprietà->getEmail() ?> </li>
+                    <li> Carta: <?php echo $proprietà->getCardDate() ?> </li>
+                    <li> Età: <?php echo $proprietà->getAge() ?> </li>
+                    <li> Genere: <?php echo $proprietà->getGender() ?> </li>
+                    <li> Sconto: <?php echo $proprietà->getDiscount() ?> % </li>
+                </ul>
 
-    <h4>Stampo tutto <?php echo $gino->getName() ?> <?php echo $gino->getSurname() ?> </h4>
-    <ul>
-        <li>
-            <?php echo $gino->getName() ?>
-            <?php echo $gino->getSurname() ?>
-             email: 
-            <?php echo $gino->getEmail() ?>
-        </li>
-        <li>
-            <?php echo $gino->getName() ?>
-            <?php echo $gino->getSurname() ?>
-             gender: 
-            <?php echo $gino->getGender() ?>
-        </li>
-    </ul>
+            </col-2>
+            <?php endforeach;?>
+        </div>
 
-    <br>
+        <!-- Riga dei prodotti -->
+        <div class="row">
+            <?php foreach ($array_prodotti as $prodotto => $valore): ?>
+            <col-2>
+                <p>
+                    <?php echo $valore->getName() ?>
+                </p>
 
-    <h4>
-        <?php echo $ciccio->getName() ?>
-         <?php echo $ciccio->getSurname() ?>
-        paga i 
-        <?php echo $dentastix->getName() ?>
-        solo:
-        <?php echo calculateDiscount($dentastix->getPrice(), $ciccio->getDiscount()) ?>
-        €
-    </h4>
+                <ul>
+                    <li> Prezzo: <?php echo $valore->getPrice() ?> € </li>
+                    <li> Codice: <?php echo $valore->getBarcode() ?> </li>
+                </ul>
+
+            </col-2>
+            <?php endforeach;?>
+        </div>
+    </div>
 
 </body>
 </html>
