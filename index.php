@@ -13,17 +13,26 @@ buon lavoro!
 
 require_once __DIR__ . "/classes/products/Product.php";
 require_once __DIR__ . "/classes/products/Food.php";
+require_once __DIR__ . "/classes/products/Toy.php";
 
-$dentastix = new Food ("Dentastix", "19,99€", "1234567890", "dogs", "Lorem", "2022-10-10");
+require_once __DIR__ . "/classes/users/User.php";
+require_once __DIR__ . "/classes/users/Regular.php";
 
-// $_name,
-// $_price,
-// $_barcode,
-// $_food_for
-// $_food_label
-// $_expiration_date
+//Alcune istanze
+$dentastix = new Food ("Dentastix", 19.99, "1234567890", "dogs", "Lorem", "2022-10-10");
+$laser = new Toy ("Laser", 10.00, "111111111", "cats");
 
-var_dump($dentastix);
+$ciccio = new Regular ("Ciccio", "Pasticcio", "CP@gmail.it", 50, "2021-01-01");
+$gino = new User ("Gino", "Pippo", "gp@gmail.it");
+$gino->setGender("NB");
+
+
+function calculateDiscount($price, $discount){
+    $resoult = round($price * ($discount/100));
+    return $resoult;
+}
+
+// var_dump(calculateDiscount());
 ?>
 
 <!DOCTYPE html>
@@ -38,6 +47,39 @@ var_dump($dentastix);
 
     <h1>HW</h1>
     <h2>Buono questo <?php echo $dentastix->getName() ?></h2>
+    <h2>I gatti inseguono i <?php echo $laser->getName() ?> perché sono sciocchi</h2>
     
+    <h3>Mai fidarsi dei brutti ceffi su internet che sanno che la tua carta scade il: <?php echo $ciccio->getCardDate() ?></h3>
+
+    <br>
+
+    <h4>Stampo tutto <?php echo $gino->getName() ?> <?php echo $gino->getSurname() ?> </h4>
+    <ul>
+        <li>
+            <?php echo $gino->getName() ?>
+            <?php echo $gino->getSurname() ?>
+             email: 
+            <?php echo $gino->getEmail() ?>
+        </li>
+        <li>
+            <?php echo $gino->getName() ?>
+            <?php echo $gino->getSurname() ?>
+             gender: 
+            <?php echo $gino->getGender() ?>
+        </li>
+    </ul>
+
+    <br>
+
+    <h4>
+        <?php echo $ciccio->getName() ?>
+         <?php echo $ciccio->getSurname() ?>
+        paga i 
+        <?php echo $dentastix->getName() ?>
+        solo:
+        <?php echo calculateDiscount($dentastix->getPrice(), $ciccio->getDiscount()) ?>
+        €
+    </h4>
+
 </body>
 </html>
